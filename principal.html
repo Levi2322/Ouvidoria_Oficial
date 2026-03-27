@@ -1,14 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Ouvidoria Dom Walfrido</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #2e7d32, #ff9800);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 320px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #ff9800;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e68900;
+    }
+
+    .link {
+      margin-top: 10px;
+      color: #2e7d32;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .success {
+      color: green;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    
-<h1> Teste de confirmação github </h1>
 
+<div class="container">
+  <h1>Ouvidoria<br>Dom Walfrido</h1>
+
+  <!-- LOGIN -->
+  <div id="loginForm">
+    <input type="text" id="loginUser" placeholder="Usuário">
+    <input type="password" id="loginPass" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <div class="link" onclick="showRegister()">Criar conta</div>
+    <div id="loginMsg"></div>
+  </div>
+
+  <!-- REGISTRO -->
+  <div id="registerForm" class="hidden">
+    <input type="text" id="regUser" placeholder="Novo usuário">
+    <input type="password" id="regPass" placeholder="Nova senha">
+    <button onclick="register()">Cadastrar</button>
+    <div class="link" onclick="showLogin()">Voltar ao login</div>
+    <div id="regMsg"></div>
+  </div>
+</div>
+
+<script>
+  function getUsers() {
+    return JSON.parse(localStorage.getItem('users') || '{}');
+  }
+
+  function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  function register() {
+    const user = document.getElementById('regUser').value;
+    const pass = document.getElementById('regPass').value;
+    const msg = document.getElementById('regMsg');
+
+    if (!user || !pass) {
+      msg.innerHTML = '<div class="error">Preencha todos os campos</div>';
+      return;
+    }
+
+    let users = getUsers();
+
+    if (users[user]) {
+      msg.innerHTML = '<div class="error">Usuário já existe</div>';
+      return;
+    }
+
+    users[user] = pass;
+    saveUsers(users);
+
+    msg.innerHTML = '<div class="success">Conta criada com sucesso!</div>';
+  }
+
+  function login() {
+    const user = document.getElementById('loginUser').value;
+    const pass = document.getElementById('loginPass').value;
+    const msg = document.getElementById('loginMsg');
+
+    let users = getUsers();
+
+    if (users[user] && users[user] === pass) {
+      msg.innerHTML = '<div class="success">Login realizado!</div>';
+    } else {
+      msg.innerHTML = '<div class="error">Usuário ou senha incorretos</div>';
+    }
+  }
+
+  function showRegister() {
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('registerForm').classList.remove('hidden');
+  }
+
+  function showLogin() {
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('loginForm').classList.remove('hidden');
+  }
+</script>
 
 </body>
 </html>
