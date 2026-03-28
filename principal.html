@@ -1,158 +1,160 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Ouvidoria Dom Walfrido</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #2e7d32, #ff9800);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouvidoria - Dom Walfrido</title>
 
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      width: 320px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      text-align: center;
-    }
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    h1 {
-      color: #2e7d32;
-      margin-bottom: 20px;
-    }
+    <!-- Ícones Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffffff, #e8f5e9);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 6px;
-      background: #ff9800;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
 
-    button:hover {
-      background: #e68900;
-    }
+        .title {
+            color: #2e7d32;
+            font-weight: bold;
+        }
 
-    .link {
-      margin-top: 10px;
-      color: #2e7d32;
-      cursor: pointer;
-      font-size: 14px;
-    }
+        .btn-custom {
+            background-color: #2e7d32;
+            color: white;
+        }
 
-    .hidden {
-      display: none;
-    }
+        .btn-custom:hover {
+            background-color: #1b5e20;
+        }
 
-    .success {
-      color: green;
-      margin-top: 10px;
-    }
+        .btn-register {
+            background-color: #ff9800;
+            color: white;
+        }
 
-    .error {
-      color: red;
-      margin-top: 10px;
-    }
-  </style>
+        .btn-register:hover {
+            background-color: #e68900;
+        }
+
+        .form-control:focus {
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 0.2rem rgba(46,125,50,.25);
+        }
+
+        .icon {
+            color: #2e7d32;
+        }
+
+        .link {
+            color: #ff9800;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Ouvidoria<br>Dom Walfrido</h1>
+<div class="login-container text-center">
 
-  <!-- LOGIN -->
-  <div id="loginForm">
-    <input type="text" id="loginUser" placeholder="Usuário">
-    <input type="password" id="loginPass" placeholder="Senha">
-    <button onclick="login()">Entrar</button>
-    <div class="link" onclick="showRegister()">Criar conta</div>
-    <div id="loginMsg"></div>
-  </div>
+    <!-- Logo / Título -->
+    <h3 class="title mb-3">
+        <i class="bi bi-chat-dots icon"></i> Ouvidoria Dom Walfrido
+    </h3>
 
-  <!-- REGISTRO -->
-  <div id="registerForm" class="hidden">
-    <input type="text" id="regUser" placeholder="Novo usuário">
-    <input type="password" id="regPass" placeholder="Nova senha">
-    <button onclick="register()">Cadastrar</button>
-    <div class="link" onclick="showLogin()">Voltar ao login</div>
-    <div id="regMsg"></div>
-  </div>
+    <p class="text-muted">Acesse o sistema</p>
+
+    <!-- Formulário -->
+    <form id="loginForm">
+
+        <!-- CPF ou Email -->
+        <div class="mb-3 text-start">
+            <label class="form-label">CPF ou Email</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person icon"></i></span>
+                <input type="text" class="form-control" id="usuario" placeholder="Digite seu CPF ou Email" required>
+            </div>
+        </div>
+
+        <!-- Senha -->
+        <div class="mb-3 text-start">
+            <label class="form-label">Senha</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-lock icon"></i></span>
+                <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" required>
+            </div>
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div id="erro" class="error-message mb-2">
+            CPF/Email ou senha incorretos.
+        </div>
+
+        <!-- Botão Entrar -->
+        <button type="submit" class="btn btn-custom w-100 mb-2">
+            Entrar
+        </button>
+
+        <!-- Links -->
+        <div class="d-flex justify-content-between mb-3">
+            <a href="#" class="link">Esqueci minha senha</a>
+        </div>
+
+        <!-- Botão Cadastrar -->
+        <button type="button" class="btn btn-register w-100">
+            Cadastrar-se
+        </button>
+
+    </form>
+
 </div>
 
 <script>
-  function getUsers() {
-    return JSON.parse(localStorage.getItem('users') || '{}');
-  }
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+        e.preventDefault();
 
-  function saveUsers(users) {
-    localStorage.setItem('users', JSON.stringify(users));
-  }
+        let usuario = document.getElementById("usuario").value;
+        let senha = document.getElementById("senha").value;
+        let erro = document.getElementById("erro");
 
-  function register() {
-    const user = document.getElementById('regUser').value;
-    const pass = document.getElementById('regPass').value;
-    const msg = document.getElementById('regMsg');
-
-    if (!user || !pass) {
-      msg.innerHTML = '<div class="error">Preencha todos os campos</div>';
-      return;
-    }
-
-    let users = getUsers();
-
-    if (users[user]) {
-      msg.innerHTML = '<div class="error">Usuário já existe</div>';
-      return;
-    }
-
-    users[user] = pass;
-    saveUsers(users);
-
-    msg.innerHTML = '<div class="success">Conta criada com sucesso!</div>';
-  }
-
-  function login() {
-    const user = document.getElementById('loginUser').value;
-    const pass = document.getElementById('loginPass').value;
-    const msg = document.getElementById('loginMsg');
-
-    let users = getUsers();
-
-    if (users[user] && users[user] === pass) {
-      msg.innerHTML = '<div class="success">Login realizado!</div>';
-    } else {
-      msg.innerHTML = '<div class="error">Usuário ou senha incorretos</div>';
-    }
-  }
-
-  function showRegister() {
-    document.getElementById('loginForm').classList.add('hidden');
-    document.getElementById('registerForm').classList.remove('hidden');
-  }
-
-  function showLogin() {
-    document.getElementById('registerForm').classList.add('hidden');
-    document.getElementById('loginForm').classList.remove('hidden');
-  }
+        // Simulação de login
+        if(usuario === "admin@domwalfrido.com" && senha === "123456") {
+            alert("Login realizado com sucesso!");
+            erro.style.display = "none";
+        } else {
+            erro.style.display = "block";
+        }
+    });
 </script>
 
 </body>
