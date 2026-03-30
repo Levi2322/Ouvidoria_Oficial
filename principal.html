@@ -1,159 +1,230 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Ouvidoria Dom Walfrido</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #2e7d32, #ff9800);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouvidoria - Escola Dom Walfrido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --verde-dom: #2D5A27;
+            --laranja-dom: #F37021;
+            --branco-dom: #FFFFFF;
+            --cinza-claro: #f8f9fa;
+        }
 
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      width: 320px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      text-align: center;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--branco-dom);
+            color: #333;
+        }
 
-    h1 {
-      color: #2e7d32;
-      margin-bottom: 20px;
-    }
+        /* Navbar Customizada */
+        .navbar {
+            background-color: var(--branco-dom);
+            border-bottom: 3px solid var(--verde-dom);
+            padding: 1rem 2rem;
+        }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+        .nav-link {
+            color: var(--verde-dom) !important;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
 
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 6px;
-      background: #ff9800;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        .nav-link:hover {
+            color: var(--laranja-dom) !important;
+        }
 
-    button:hover {
-      background: #e68900;
-    }
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #e9f5e8 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .link {
-      margin-top: 10px;
-      color: #2e7d32;
-      cursor: pointer;
-      font-size: 14px;
-    }
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--laranja-dom);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
 
-    .hidden {
-      display: none;
-    }
+        h1 {
+            color: var(--verde-dom);
+            font-weight: 700;
+            font-size: 3rem;
+        }
 
-    .success {
-      color: green;
-      margin-top: 10px;
-    }
+        .text-orange {
+            color: var(--laranja-dom);
+        }
 
-    .error {
-      color: red;
-      margin-top: 10px;
-    }
-  </style>
+        /* Botões Principais */
+        .btn-ouvidoria {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: transform 0.3s;
+            border: none;
+        }
+
+        .btn-ouvidoria:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-registrar { background-color: var(--laranja-dom); color: white; }
+        .btn-consultar { background-color: var(--verde-dom); color: white; }
+
+        /* Cards de Categoria */
+        .cat-card {
+            border: none;
+            border-radius: 20px;
+            transition: 0.3s;
+            background: var(--branco-dom);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .cat-card:hover {
+            border-bottom: 5px solid var(--laranja-dom);
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background-color: #f1f8f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--verde-dom);
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background-color: var(--verde-dom);
+            color: white;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Ouvidoria<br>Dom Walfrido</h1>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="fw-bold fs-4" style="color: var(--verde-dom);">
+                    DOM <span style="color: var(--laranja-dom);">WALFRIDO</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-home me-1"></i> Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sobre Nós</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-success px-4 ms-lg-3" href="#" style="border-radius: 20px;">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- LOGIN -->
-  <div id="loginForm">
-    <input type="text" id="loginUser" placeholder="Usuário">
-    <input type="password" id="loginPass" placeholder="Senha">
-    <button onclick="login()">Entrar</button>
-    <div class="link" onclick="showRegister()">Criar conta</div>
-    <div id="loginMsg"></div>
-  </div>
+    <section class="hero-section text-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <img src= "C:\Users\Aluno\Downloads\images.jpg" alt="Logo" class="mb-4 rounded-circle border border-3 border-success p-2">
+                    <h1 class="mb-3">SUA VOZ <span class="text-orange">IMPORTA</span></h1>
+                    <p class="lead text-muted mb-5">Espaço exclusivo para alunos da Escola Dom Walfrido. Queremos ouvir suas sugestões, críticas e elogios para construirmos juntos uma escola melhor.</p>
+                    
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                        <button class="btn btn-ouvidoria btn-registrar btn-lg">
+                            <i class="fas fa-plus-circle me-2"></i> Registrar Ocorrência
+                        </button>
+                        <button class="btn btn-ouvidoria btn-consultar btn-lg">
+                            <i class="fas fa-search me-2"></i> Consultar Status
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- REGISTRO -->
-  <div id="registerForm" class="hidden">
-    <input type="text" id="regUser" placeholder="Novo usuário">
-    <input type="password" id="regPass" placeholder="Nova senha">
-    <button onclick="register()">Cadastrar</button>
-    <div class="link" onclick="showLogin()">Voltar ao login</div>
-    <div id="regMsg"></div>
-  </div>
-</div>
+    <section class="container my-5">
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <div class="card cat-card p-4 h-100 shadow-sm" onclick="handleCategory('Elogio')">
+                    <div class="icon-circle"><i class="fas fa-thumbs-up"></i></div>
+                    <h5>Elogios</h5>
+                    <p class="small text-muted">Reconheça um bom trabalho ou projeto.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card cat-card p-4 h-100 shadow-sm" onclick="handleCategory('Sugestão')">
+                    <div class="icon-circle"><i class="fas fa-lightbulb"></i></div>
+                    <h5>Sugestões</h5>
+                    <p class="small text-muted">Ideias para melhorar nosso ambiente escolar.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card cat-card p-4 h-100 shadow-sm" onclick="handleCategory('Reclamação')">
+                    <div class="icon-circle"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h5>Reclamações</h5>
+                    <p class="small text-muted">Relate problemas que precisam de atenção.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card cat-card p-4 h-100 shadow-sm" onclick="handleCategory('Dúvida')">
+                    <div class="icon-circle"><i class="fas fa-question-circle"></i></div>
+                    <h5>Dúvidas</h5>
+                    <p class="small text-muted">Pergunte sobre processos ou eventos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-  function getUsers() {
-    return JSON.parse(localStorage.getItem('users') || '{}');
-  }
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-1">© 2026 Escola Dom Walfrido - Sistema de Ouvidoria</p>
+            <div class="small opacity-75">
+                <a href="#" class="text-white text-decoration-none mx-2">Política de Privacidade</a> | 
+                <a href="#" class="text-white text-decoration-none mx-2">Termos de Uso</a>
+            </div>
+        </div>
+    </footer>
 
-  function saveUsers(users) {
-    localStorage.setItem('users', JSON.stringify(users));
-  }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function handleCategory(tipo) {
+            alert("Você selecionou a categoria: " + tipo + ". Redirecionando para o formulário...");
+            // Aqui você poderia usar: window.location.href = 'formulario.html?tipo=' + tipo;
+        }
 
-  function register() {
-    const user = document.getElementById('regUser').value;
-    const pass = document.getElementById('regPass').value;
-    const msg = document.getElementById('regMsg');
-
-    if (!user || !pass) {
-      msg.innerHTML = '<div class="error">Preencha todos os campos</div>';
-      return;
-    }
-
-    let users = getUsers();
-
-    if (users[user]) {
-      msg.innerHTML = '<div class="error">Usuário já existe</div>';
-      return;
-    }
-
-    users[user] = pass;
-    saveUsers(users);
-
-    msg.innerHTML = '<div class="success">Conta criada com sucesso!</div>';
-  }
-
-  function login() {
-    const user = document.getElementById('loginUser').value;
-    const pass = document.getElementById('loginPass').value;
-    const msg = document.getElementById('loginMsg');
-
-    let users = getUsers();
-
-    if (users[user] && users[user] === pass) {
-      msg.innerHTML = '<div class="success">Login realizado!</div>';
-    } else {
-      msg.innerHTML = '<div class="error">Usuário ou senha incorretos</div>';
-    }
-  }
-
-  function showRegister() {
-    document.getElementById('loginForm').classList.add('hidden');
-    document.getElementById('registerForm').classList.remove('hidden');
-  }
-
-  function showLogin() {
-    document.getElementById('registerForm').classList.add('hidden');
-    document.getElementById('loginForm').classList.remove('hidden');
-  }
-</script>
-
+        // Efeito simples de scroll na navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+            } else {
+                nav.style.boxShadow = "none";
+            }
+        });
+    </script>
 </body>
 </html>
