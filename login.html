@@ -146,7 +146,7 @@
         Esqueci minha senha
       </div>
 
-      <button class="btn-main">Login</button>
+      <button class="btn-main" onclick="entrar()">Login</button>
 
       <div class="switch" onclick="mostrarCadastro()">
         Não tem conta? Cadastre-se
@@ -180,6 +180,11 @@
       document.getElementById("cadastroForm").classList.add("hidden");
       document.getElementById("loginForm").classList.remove("hidden");
     }
+
+
+    function entrar() {
+  window.location.href = "dashboard.html";
+}
 
     function voltar() {
       window.location.href = "principal.html"; // ajuste se necessário
