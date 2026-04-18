@@ -21,6 +21,16 @@
       justify-content: center;
     }
 
+    img{ 
+width: 60px;
+border-radius: 100%;
+margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+
+    }
     .card-box {
       background: white;
       padding: 40px;
@@ -74,7 +84,7 @@
     }
 
     .btn-back {
-      position: absolute;
+      position: down;
       top: 15px;
       left: 15px;
       background: #f05a22;
@@ -84,6 +94,7 @@
       padding: 5px 15px;
       font-size: 14px;
       transition: 0.3s;
+  
     }
 
     .btn-back:hover {
@@ -125,13 +136,12 @@
 
   <div class="card-box">
 
-    <!-- BOTÃO VOLTAR -->
-    <button class="btn-back" onclick="voltar()">
-      ← Início
-    </button>
+
+
+<img src="Logo.png" alt="Imagem escola">
 
     <div class="logo">
-      🏫 DOM WALFRIDO
+       DOM WALFRIDO
       <span>OUVIDORIA ESCOLAR</span>
     </div>
 
@@ -153,13 +163,18 @@
       </div>
     </div>
 
+    <!-- BOTÃO VOLTAR -->
+    <button class="btn-back" onclick="voltar()">
+      ← Início
+    </button>
+
     <!-- CADASTRO -->
     <div id="cadastroForm" class="hidden">
       <h3 class="title">Cadastro</h3>
 
-      <input type="text" class="form-control mb-3" placeholder="Nome completo">
-      <input type="email" class="form-control mb-3" placeholder="E-mail">
-      <input type="password" class="form-control mb-3" placeholder="Senha">
+      <input type="text" class="form-control mb-3" placeholder="Nome completo" required>
+      <input type="email" class="form-control mb-3" placeholder="E-mail" required>
+      <input type="password" class="form-control mb-3" placeholder="Senha" required>
 
       <button class="btn-main">Cadastrar</button>
 
