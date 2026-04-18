@@ -22,15 +22,14 @@
     }
 
     img{ 
-width: 60px;
-border-radius: 100%;
-margin-bottom: 20px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  
-
+      width: 60px;
+      border-radius: 100%;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
+
     .card-box {
       background: white;
       padding: 40px;
@@ -94,7 +93,6 @@ margin-bottom: 20px;
       padding: 5px 15px;
       font-size: 14px;
       transition: 0.3s;
-  
     }
 
     .btn-back:hover {
@@ -128,7 +126,6 @@ margin-bottom: 20px;
     .hidden {
       display: none;
     }
-
   </style>
 </head>
 
@@ -136,53 +133,52 @@ margin-bottom: 20px;
 
   <div class="card-box">
 
-
-
-<img src="Logo.png" alt="Imagem escola">
+    <img src="Logo.png" alt="Imagem escola">
 
     <div class="logo">
-       DOM WALFRIDO
+      DOM WALFRIDO
       <span>OUVIDORIA ESCOLAR</span>
     </div>
 
-    <!-- LOGIN -->
-    <div id="loginForm">
+    <!-- LOGIN (SÓ MUDANÇA: virou FORM) -->
+    <form id="loginForm">
       <h3 class="title">Entrar</h3>
 
-      <input type="email" class="form-control mb-3" placeholder="E-mail">
-      <input type="password" class="form-control mb-2" placeholder="Senha">
+      <input type="email" class="form-control mb-3" placeholder="E-mail" required>
+      <input type="password" class="form-control mb-2" placeholder="Senha" required>
 
       <div class="forgot" onclick="esqueciSenha()">
         Esqueci minha senha
       </div>
 
-      <button class="btn-main" onclick="entrar()">Login</button>
+      <button class="btn-main" type="submit">Login</button>
 
       <div class="switch" onclick="mostrarCadastro()">
         Não tem conta? Cadastre-se
       </div>
-    </div>
-
-    <!-- BOTÃO VOLTAR -->
-    <button class="btn-back" onclick="voltar()">
-      ← Início
-    </button>
+    </form>
 
     <!-- CADASTRO -->
-    <div id="cadastroForm" class="hidden">
+    <form id="cadastroForm" class="hidden">
       <h3 class="title">Cadastro</h3>
 
       <input type="text" class="form-control mb-3" placeholder="Nome completo" required>
       <input type="email" class="form-control mb-3" placeholder="E-mail" required>
       <input type="password" class="form-control mb-3" placeholder="Senha" required>
 
-      <button class="btn-main">Cadastrar</button>
+      <button class="btn-main" type="submit">Cadastrar</button>
 
       <div class="switch" onclick="mostrarLogin()">
         Já tem conta? Fazer login
+  
       </div>
-    </div>
+    </form>
 
+      <!-- BOTÃO VOLTAR -->
+    <button class="btn btn-link w-100 mt-2" onclick="voltar()">← Voltar</button>
+    
+    </button>
+    
   </div>
 
   <script>
@@ -196,15 +192,33 @@ margin-bottom: 20px;
       document.getElementById("loginForm").classList.remove("hidden");
     }
 
+    // LOGIN VALIDADO
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      if (!this.checkValidity()) {
+        event.preventDefault();
+        this.reportValidity();
+        return;
+      }
 
-    function entrar() {
-  window.location.href = "dashboard.html";
-}
+      event.preventDefault();
+      window.location.href = 'dashboard.html';
+    });
+
+    // CADASTRO VALIDADO
+    document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+      if (!this.checkValidity()) {
+        event.preventDefault();
+        this.reportValidity();
+        return;
+      }
+
+      event.preventDefault();
+      alert("Cadastro realizado com sucesso!");
+    });
 
     function voltar() {
-      window.location.href = "principal.html"; // ajuste se necessário
+      window.location.href = "principal.html";
     }
-
 
     function esqueciSenha() {
       alert("Redirecionar para recuperação de senha");
