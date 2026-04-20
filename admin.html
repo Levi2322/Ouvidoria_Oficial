@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Ouvidoria</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f1f5f9;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px;
+  height: 100vh;
+  background: linear-gradient(180deg, #f05a22, #ff9800);
+  color: white;
+  position: fixed;
+  padding: 20px;
+}
+
+.sidebar h4 {
+  font-weight: 700;
+}
+
+.sidebar button {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.sidebar button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* CONTEÚDO */
+.content {
+  margin-left: 250px;
+  padding: 30px;
+}
+
+/* CARD */
+.card-box {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+/* ITEM */
+.item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  transition: 0.3s;
+}
+
+.item:hover {
+  background: #f9f9f9;
+}
+
+/* STATUS */
+.badge-status {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.analise { background: #fff3cd; }
+.resolvido { background: #d4edda; }
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h4>👨‍💼 Admin</h4>
+  <p style="font-size:12px;">Ouvidoria</p>
+
+  <button onclick="carregar()">📋 Todas</button>
+  <button onclick="filtrar('Em análise')">⏳ Em análise</button>
+  <button onclick="filtrar('Resolvido')">✅ Resolvidas</button>
+  <button onclick="logout()">🚪 Sair</button>
+</div>
+
+<!-- CONTEÚDO -->
+<div class="content">
+
+  <div class="card-box">
+    <h4>Manifestação recebidas</h4>
+    <div id="lista"></div>
+  </div>
+
+</div>
+
+<script>
+// CARREGAR TODAS
+function carregar() {
+  db.collection("manifestacoes")
+    .orderBy("data", "desc")
+    .get()
+    .then(snapshot => render(snapshot));
+}
+
+// FILTRAR
+function filtrar(status) {
+  db.collection("manifestacoes")
+    .where("status", "==", status)
+    .get()
+    .then(snapshot => render(snapshot));
+}
+
+// RENDERIZAR
+function render(snapshot) {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    const item = doc.data();
+
+    lista.innerHTML += `
+      <div class="item">
+        <strong>#${item.protocolo}</strong>
+        ${item.anonimo ? '<span class="badge bg-dark">Anônimo</span>' : ''}
+
+        <br><b>${item.assunto}</b>
+        <br>${item.tipo}
+
+        <br>
+        <span class="badge-status ${item.status === 'Resolvido' ? 'resolvido' : 'analise'}">
+          ${item.status}
+        </span>
+
+        <br><br>
+
+        <select onchange="mudarStatus('${doc.id}', this.value)">
+          <option ${item.status==='Em análise'?'selected':''}>Em análise</option>
+          <option ${item.status==='Resolvido'?'selected':''}>Resolvido</option>
+        </select>
+
+        <button class="btn btn-sm btn-danger ms-2" onclick="excluir('${doc.id}')">
+          Excluir
+        </button>
+      </div>
+    `;
+  });
+}
+
+// ALTERAR STATUS
+function mudarStatus(id, status){
+  db.collection("manifestacoes").doc(id).update({status})
+    .then(() => carregar());
+}
+
+// EXCLUIR
+function excluir(id){
+  if(confirm("Excluir manifestação?")){
+    db.collection("manifestacoes").doc(id).delete()
+      .then(() => carregar());
+  }
+}
+
+// LOGOUT
+function logout(){
+  window.location.href = "principal.html";
+}
+
+// AUTO LOAD
+carregar();
+</script>
+
+</body>
+</html>
